@@ -1,4 +1,48 @@
-.welcome-card img {
-  max-height: 35vh;
-  overflow: hidden;
+@import url('https://fonts.googleapis.com/css?family=Lobster+Two:700&display=swap');
+
+ion-list-header {
+  --color: #3880ff;
+  font-size: 1.2rem;
+  margin-bottom: -30px;
+}
+
+ion-icon[name="md-trash"] {
+  position: absolute !important;
+  top: 5px;
+  right: 5px;
+  color: white;
+  font-size: 24px;
+  z-index: 1 !important;
+}
+
+.places-none {
+  position: fixed;
+  width: 100%;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Lobster Two', cursive;
+  font-size: 1.8rem;
+}
+
+#finalizado-banner {
+  position: absolute;
+  width: 35%;
+  top: 0px;
+  right: 0;
+}
+
+#separador {
+  height: 22px;
+  margin-bottom: 10px;
+}
+
+.listado-ion-col:last-child {
+  margin-bottom: 40px;
+}
+
+#separador,
+#listado-de-finalizados {
+  display: none;
+  transition: all ease-in-out .6s;
 }

@@ -24,3 +24,39 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+@import url('https://fonts.googleapis.com/css?family=Damion|Dosis:700&display=swap');
+
+.text-center {
+    text-align: center !important;
+}
+
+.danger-text {
+    color: #f12222 !important;
+}
+
+::-webkit-input-placeholder {
+    text-transform: none;
+}
+
+:-ms-input-placeholder {
+    text-transform: none;
+}
+
+::placeholder {
+    text-transform: none;
+}
+
+ion-title {
+    font-family: 'Damion', cursive !important;
+    font-size: 2rem !important;
+    font-weight: bold;
+}
+
+ion-list-header.tab1-list-header {
+    font-weight: bold;
+}
+
+ion-list-header {
+    font-family: 'Dosis', sans-serif;
+}

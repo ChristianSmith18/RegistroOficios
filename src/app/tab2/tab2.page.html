@@ -1,9 +1,34 @@
-<ion-header>
+<ion-header id="myHeader">
   <ion-toolbar>
-    <ion-title>
-      Tab Two
+    <ion-title class="text-center">
+      Crear Documento Final
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <ion-fab vertical="bottom" horizontal="center">
+    <ion-fab-button (click)="saveDoc()">
+      <ion-icon name="ios-save"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+ 
+  <div id="printable-area" class="my-bg" (click)="toggleButton()">
+    <div class="my-border">
+      <p class="title">INFORME FINAL DE TRÁMITES ENTREGADOS</p>
+      <p class="first-fields"><b>NOMBRE</b>: CRISTIAN GONZÁLEZ ROSSIER
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>MES</b>: {{ meses[month].toUpperCase() }}</p>
+      <div *ngFor="let persona of misOficios">
+        <p class="nombres">&nbsp;&nbsp;{{ persona.nombre }}</p>
+        <ul>
+          <li *ngFor="let oficio of persona.oficios">{{ oficio.lugar.toUpperCase() }}</li>
+        </ul>
+      </div>
+      <p class="costo-gestion"><b>COSTE SIN IMPUESTO</b>
+        :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${{ tarifaFormat(cantOficios * 1200) }}</p>
+      <p class="costo-total"><b><i>COSTE TOTAL</i></b>
+        :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${{ tarifaFormatStr(((cantOficios * 1200)/0.8925).toFixed(0)) }}</p>
+    </div>
+  </div>
+</ion-content>

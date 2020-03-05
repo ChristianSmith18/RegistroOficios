@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+        Atrás
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Detalles de {{ listado.nombreListado }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-fab *ngIf="showFabButton">
+    <ion-fab-button color="primary">
+      <ion-icon name="md-radio-button-on"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button (click)="saveAll()">
+        <ion-icon name="ios-save"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="openLocomocion()">
+        <ion-icon name="md-bus"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="start">
+      <ion-fab-button (click)="finalizar()">
+        <ion-icon name="ios-cloud-done"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="ios-add-circle-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <ion-list>
+    <div *ngFor="let persona of listado.personas; let i = index">
+
+      <ion-list-header *ngIf="isOficiosNoEntregados(i)">
+        {{ persona.nombre }}
+      </ion-list-header>
+
+      <ion-item-sliding *ngFor="let oficio of persona.oficios; let j = index">
+        <div [ngClass]="{'non-display': oficio.entregado}">
+          <ion-item-options side="start">
+            <ion-item-option (click)="openGoogleMaps(oficio.mapa)">
+              <ion-icon name="ios-navigate" style="margin-right: 5px;"></ion-icon>
+              <ion-label>Ir a mapa</ion-label>
+            </ion-item-option>
+          </ion-item-options>
+
+          <ion-item class="item-slide1">
+            <ion-checkbox mode="ios" color="success" slot="start" [checked]="oficio.entregado"></ion-checkbox>
+            <ion-label>{{ oficio.lugar }}</ion-label>
+          </ion-item>
+
+          <ion-item-options side="end">
+            <ion-item-option (click)="getLocation(oficio)">Ubicación</ion-item-option>
+            <ion-item-option color="danger" (click)="deleteItem(i, j)">Eliminar</ion-item-option>
+          </ion-item-options>
+        </div>
+      </ion-item-sliding>
+
+    </div>
+  </ion-list>
+
+  <ion-list *ngIf="isOficiosEntregadosAll()">
+    <h1>
+      <span *ngIf="showFabButton">&nbsp;Entregados</span>
+      <span *ngIf="!showFabButton">&nbsp;Listado de Oficios</span>
+    </h1>
+    <div *ngFor="let persona of listado.personas; let i = index">
+
+      <ion-list-header *ngIf="isOficiosEntregados(i)">
+        {{ persona.nombre }}
+      </ion-list-header>
+
+      <div *ngFor="let oficio of persona.oficios;">
+        <ion-item *ngIf="oficio.entregado" detail button detail-icon="information-circle" class="item-slide1"
+          (click)="showDateEntrega(oficio.fechaEntrega)">
+          <ion-label>{{ oficio.lugar }}</ion-label>
+        </ion-item>
+      </div>
+    </div>
+  </ion-list>
+</ion-content>

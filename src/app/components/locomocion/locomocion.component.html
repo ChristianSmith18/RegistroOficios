@@ -1,0 +1,59 @@
+<ion-header id="myHeader">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+        Atrás
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Generar documento PDF</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-fab id="myFab">
+    <ion-fab-button color="primary">
+      <ion-icon name="md-radio-button-on"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button (click)="remove()">
+        <ion-icon name="ios-remove-circle"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="add()">
+        <ion-icon name="ios-add-circle"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="start">
+      <ion-fab-button (click)="addObservacion()">
+        <ion-icon name="ios-eye"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="ios-camera" (click)="takeScreenShot()"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <div id="printable-area" class="my-bg">
+    <div class="my-border">
+      <p class="title">GESTIÓN DE TRÁMITES EXTERNOS</p>
+      <br>
+      <p class="first-fields"><b>NOMBRE</b>: CRISTIAN GONZÁLEZ ROSSIER
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>FECHA</b>:<span *ngIf="(day + '').length === 1">0</span>{{ day }}-<span
+          *ngIf="(month + '').length === 1">0</span>{{ month }}-{{ year }}</p>
+      <br><br>
+      <p class="direcciones">&nbsp;&nbsp;&nbsp;&nbsp;<b>DIRECCIONES</b>:</p>
+      <ul>
+        <li *ngFor="let objeto of locomocionData">{{ objeto.calle.toUpperCase() }} ({{ objeto.lugar.toUpperCase() }})
+        </li>
+      </ul>
+      <br><br>
+      <div *ngIf="observacion.length > 0">
+        <p class="observaciones">&nbsp;&nbsp;&nbsp;&nbsp;<b>OBSERVACIONES</b>:</p>
+        <p class="descripcion">{{ observacion }}</p>
+      </div>
+      <p class="costo-gestion"><b>COSTO DE
+          GESTIÓN</b>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${{ tarifaFormat(tarifa) }}</p>
+    </div>
+  </div>
+</ion-content>
